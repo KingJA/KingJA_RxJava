@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 import rx.Observer;
+import rx.Subscriber;
 
 /**
  * Description：TODO
@@ -23,11 +24,51 @@ import rx.Observer;
  */
 public class TestActivity extends AppCompatActivity {
     private String TAG=getClass().getSimpleName();
+    private Button btn;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
-        Button btn = (Button) findViewById(R.id.btn);
+        onRxClick();
+
+        Observer<String> observer = new Observer<String>() {
+            @Override
+            public void onNext(String s) {
+                Log.d(TAG, "Item: " + s);
+            }
+
+            @Override
+            public void onCompleted() {
+                Log.d(TAG, "Completed!");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d(TAG, "Error!");
+            }
+        };
+
+        Subscriber<String> subscriber = new Subscriber<String>() {
+            @Override
+            public void onNext(String s) {
+                Log.d(TAG, "Item: " + s);
+            }
+
+            @Override
+            public void onCompleted() {
+                Log.d(TAG, "Completed!");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d(TAG, "Error!");
+            }
+        };
+    }
+
+    private void onRxClick() {
+        btn = (Button) findViewById(R.id.btn);
         RxView.clicks(btn)
                 .throttleFirst(1, TimeUnit.SECONDS)
                 .subscribe(new Observer<Object>() {
