@@ -23,7 +23,7 @@ import rx.Subscriber;
  * Email:kingjavip@gmail.com
  */
 public class TestActivity extends AppCompatActivity {
-    private String TAG=getClass().getSimpleName();
+    private String TAG = getClass().getSimpleName();
     private Button btn;
 
     @Override
@@ -48,23 +48,38 @@ public class TestActivity extends AppCompatActivity {
                 Log.d(TAG, "Error!");
             }
         };
-
+/**
+ * 创建观察者
+ */
         Subscriber<String> subscriber = new Subscriber<String>() {
             @Override
             public void onNext(String s) {
-                Log.d(TAG, "Item: " + s);
+                Log.e(TAG, "Item: " + s);
             }
 
             @Override
             public void onCompleted() {
-                Log.d(TAG, "Completed!");
+                Log.e(TAG, "Completed!");
             }
 
             @Override
             public void onError(Throwable e) {
-                Log.d(TAG, "Error!");
+                Log.e(TAG, "Error!");
             }
         };
+/**
+ * 创建被观察者
+ */
+        Observable observable = Observable.create(new Observable.OnSubscribe<String>() {
+            @Override
+            public void call(Subscriber<? super String> subscriber) {
+                subscriber.onNext("Hello");
+                subscriber.onNext("Hi");
+                subscriber.onNext("Aloha");
+                subscriber.onCompleted();
+            }
+        });
+        observable.subscribe(subscriber);
     }
 
     private void onRxClick() {
