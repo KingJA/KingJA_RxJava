@@ -1,5 +1,6 @@
 package com.example.administrator.kingja_rxjava;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
@@ -15,6 +16,9 @@ import java.util.concurrent.TimeUnit;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
+import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.functions.Func1;
 
 /**
  * Description：TODO
@@ -79,7 +83,37 @@ public class TestActivity extends AppCompatActivity {
                 subscriber.onCompleted();
             }
         });
-        observable.subscribe(subscriber);
+
+        /**
+         * 被观察者添加观察者，这样被观察者发生变化就会第一时间通知观察者
+         */
+//        observable.subscribe(subscriber);
+
+        String[] names ={"A","B","C"};
+        Observable.from(names)
+                .subscribe(new Action1<String>() {
+                    @Override
+                    public void call(String name) {
+                        Log.d(TAG, name);
+                    }
+                });
+
+
+
+        Integer[] items = { 0, 1, 2, 3, 4, 5 };
+        Observable myObservable = Observable.from(items);
+        Observable.just("images/logo.png") // 输入类型 String
+                .map(new Func1<String, Bitmap>() {
+                    @Override
+                    public Bitmap call(String filePath) {
+                        return null;// 参数类型 String
+                    }
+                })
+                .subscribe(new Action1<Bitmap>() {
+                    @Override
+                    public void call(Bitmap bitmap) { // 参数类型 Bitmap
+                    }
+                });
     }
 
     private void onRxClick() {
@@ -103,5 +137,4 @@ public class TestActivity extends AppCompatActivity {
                     }
                 });
     }
-
 }
