@@ -89,31 +89,44 @@ public class TestActivity extends AppCompatActivity {
          */
 //        observable.subscribe(subscriber);
 
-        String[] names ={"A","B","C"};
-        Observable.from(names)
-                .subscribe(new Action1<String>() {
-                    @Override
-                    public void call(String name) {
-                        Log.d(TAG, name);
-                    }
-                });
+//        String[] names = {"A", "B", "C"};
+//        Observable.from(names)
+//                .subscribe(new Action1<String>() {
+//                    @Override
+//                    public void call(String name) {
+//                        Log.d(TAG, name);
+//                    }
+//                });
+//
+//
+//        Integer[] items = {0, 1, 2, 3, 4, 5};
+//        Observable myObservable = Observable.from(items);
+//        Observable.just("images/logo.png") // 输入类型 String
+//                .map(new Func1<String, Bitmap>() {
+//                    @Override
+//                    public Bitmap call(String filePath) {
+//                        return null;// 参数类型 String
+//                    }
+//                })
+//                .subscribe(new Action1<Bitmap>() {
+//                    @Override
+//                    public void call(Bitmap bitmap) { // 参数类型 Bitmap
+//                    }
+//                });
 
+//        Person[] arr = {new Person("TOM", 15), new Person("JACK", 18), new Person("KING", 20)};
+//        Observable.from(arr).flatMap(new Func1<Person, Observable<String>>() {
+//            @Override
+//            public Observable<String> call(Person person) {
+//                return Observable.just(person.getName());
+//            }
+//        }).subscribe(new Action1<String>() {
+//            @Override
+//            public void call(String s) {
+//                Log.e(TAG, "call: "+s  );
+//            }
+//        });
 
-
-        Integer[] items = { 0, 1, 2, 3, 4, 5 };
-        Observable myObservable = Observable.from(items);
-        Observable.just("images/logo.png") // 输入类型 String
-                .map(new Func1<String, Bitmap>() {
-                    @Override
-                    public Bitmap call(String filePath) {
-                        return null;// 参数类型 String
-                    }
-                })
-                .subscribe(new Action1<Bitmap>() {
-                    @Override
-                    public void call(Bitmap bitmap) { // 参数类型 Bitmap
-                    }
-                });
     }
 
     private void onRxClick() {
