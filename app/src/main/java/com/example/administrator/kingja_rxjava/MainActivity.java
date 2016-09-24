@@ -42,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * RxJava配合Retrofit访问网络
+     * @param apiService
+     */
+
     private void doNetByRxJava(DouBanService apiService) {
         apiService.getHotShowing()
                 .subscribeOn(Schedulers.io())
