@@ -19,6 +19,7 @@ import rx.Subscriber;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Func1;
+import rx.functions.Func2;
 
 /**
  * Description：TODO
@@ -74,15 +75,15 @@ public class TestActivity extends AppCompatActivity {
 /**
  * 创建被观察者
  */
-        Observable observable = Observable.create(new Observable.OnSubscribe<String>() {
-            @Override
-            public void call(Subscriber<? super String> subscriber) {
-                subscriber.onNext("Hello");
-                subscriber.onNext("Hi");
-                subscriber.onNext("Aloha");
-                subscriber.onCompleted();
-            }
-        });
+//        Observable observable = Observable.create(new Observable.OnSubscribe<String>() {
+//            @Override
+//            public void call(Subscriber<? super String> subscriber) {
+//                subscriber.onNext("Hello");
+//                subscriber.onNext("Hi");
+//                subscriber.onNext("Aloha");
+//                subscriber.onCompleted();
+//            }
+//        });
 
         /**
          * 被观察者添加观察者，这样被观察者发生变化就会第一时间通知观察者
@@ -126,6 +127,83 @@ public class TestActivity extends AppCompatActivity {
 //                Log.e(TAG, "call: "+s  );
 //            }
 //        });
+//        Observable.timer(2,TimeUnit.SECONDS).subscribe(new Action1<Long>() {
+//            @Override
+//            public void call(Long aLong) {
+//                Log.e(TAG, "call: "+aLong );
+//            }
+//        });
+//        Observable.just("abc","ec","ccc","aa").filter(new Func1<String, Boolean>() {
+//            @Override
+//            public Boolean call(String s) {
+//                return s.startsWith("a");
+//            }
+//        }).subscribe(new Action1<String>() {
+//            @Override
+//            public void call(String s) {
+//                Log.e(TAG, "call: "+s );
+//            }
+//        });
+//        Observable.range(1,8).subscribe(new Action1<Integer>() {
+//            @Override
+//            public void call(Integer integer) {
+//                Log.e(TAG, "call: "+integer);
+//            }
+//        });
+
+//        Observable.just(1,2).take(3).subscribe(new Action1<Integer>() {
+//            @Override
+//            public void call(Integer integer) {
+//                Log.e(TAG, "call: "+integer);
+//            }
+//        });
+
+//        Observable.just(1,2,3,3,3,4,4,5).distinctUntilChanged().subscribe(new Action1<Integer>() {
+//            @Override
+//            public void call(Integer integer) {
+//                Log.e(TAG, "call: "+integer);
+//            }
+//        });
+
+//        Observable.just(1,2,3).last().subscribe(new Action1<Integer>() {
+//            @Override
+//            public void call(Integer integer) {
+//                Log.e(TAG, "call: "+integer);
+//            }
+//        });
+
+//        Observable.just(1,2,3,4,5).elementAtOrDefault(10,88).subscribe(new Action1<Integer>() {
+//            @Override
+//            public void call(Integer integer) {
+//                Log.e(TAG, "call: "+integer);
+//            }
+//        });
+
+//        Observable.just(1,2,3,4,5).sample(2,TimeUnit.SECONDS).subscribe(new Action1<Integer>() {
+//            @Override
+//            public void call(Integer integer) {
+//                Log.e(TAG, "call: "+integer);
+//            }
+//        });
+
+//        Observable.just(1,2,3,4,5).debounce(2,TimeUnit.SECONDS).subscribe(new Action1<Integer>() {
+//            @Override
+//            public void call(Integer integer) {
+//                Log.e(TAG, "call: "+integer);
+//            }
+//        });
+
+                Observable.just(1,2,3,4,5).scan(new Func2<Integer, Integer, Integer>() {
+                    @Override
+                    public Integer call(Integer integer, Integer integer2) {
+                        return integer+integer2;
+                    }
+                }).subscribe(new Action1<Integer>() {
+            @Override
+            public void call(Integer integer) {
+                Log.e(TAG, "call: "+integer);
+            }
+        });
 
     }
 
